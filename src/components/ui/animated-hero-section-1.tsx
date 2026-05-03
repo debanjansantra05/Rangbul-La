@@ -73,10 +73,15 @@ export const AnimatedHero = ({
         className
       )}
     >
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-      >
+      <div className="absolute inset-0 z-0">
+        <video
+        className="w-full h-full object-cover"
+        src="/src/assets/video.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
         <div className="absolute inset-0 bg-black/60" />
       </div>
 

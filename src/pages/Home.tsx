@@ -5,13 +5,14 @@ import { MountainIcon } from "lucide-react";
 export default function Home() {
   const navLinks = [
     { label: "Home", href: "#" },
-    { label: "About Us", href: "#" },
+    { label: "Overview", href: "#" },
+    { label: "Rooms & Suites", href: "#" },
+    { label: "Experience", href: "#" },
     { label: "Contact", href: "#" },
   ];
 
   return (
     <AnimatedHero
-      backgroundImageUrl="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1600"
       logo={
         <>
           <MountainIcon className="h-6 w-6 text-primary-foreground" />
@@ -26,8 +27,8 @@ export default function Home() {
           Book Now
         </Button>
       }
-      title="Take Charge of your Generation Now"
-      description="Lead with purpose, build boldly, and shape the future—your generation's moment is now."
+      title="Boutique Sustainable Homestay in Darjeeling"
+      description="A forest garden retreat in Darjeeling offering slow, artisanal meals, immersive nature walks, and rich birdlife—crafted for mindful, soulful escapes."
     />
   );
 }
