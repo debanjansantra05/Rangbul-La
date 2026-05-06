@@ -1,19 +1,12 @@
+'use client';
+
 import * as React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-// Interface definitions remain the same
-interface NavLink {
-  label: string;
-  href: string;
-}
-
+// Interfaces
 interface AnimatedHeroProps {
-  backgroundImageUrl: string;
-  logo: React.ReactNode;
-  navLinks: NavLink[];
-  topRightAction?: React.ReactNode;
   title: string;
   description: string;
   ctaButton?: {
@@ -27,7 +20,7 @@ interface AnimatedHeroProps {
   className?: string;
 }
 
-// Animation variants remain the same
+// Animations
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -46,25 +39,20 @@ const itemVariants = {
     opacity: 1,
     transition: {
       duration: 0.6,
-       ease: "easeInOut" as const,
+      ease: "easeInOut" as const,
     },
   },
 };
 
 export const AnimatedHero = ({
-  backgroundImageUrl,
-  logo,
-  navLinks,
-  topRightAction,
   title,
   description,
   ctaButton,
   secondaryCta,
   className,
 }: AnimatedHeroProps) => {
-  // Define the new reusable glass button style
   const glassButtonClassName =
-    "bg-white/10 backdrop-blur-sm border border-white/20 text-primary-foreground hover:bg-white/20 transition-colors";
+    "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-colors";
 
   return (
     <div
@@ -73,39 +61,20 @@ export const AnimatedHero = ({
         className
       )}
     >
+      {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
-        className="w-full h-full object-cover"
-        src="/src/assets/video.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+          className="w-full h-full object-cover"
+          src="/src/assets/video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8,  ease: "easeInOut" as const }}
-        className="absolute top-0 z-20 flex h-20 w-full items-center justify-between px-6 md:px-12 text-white"
-      >
-        <div className="flex items-center gap-2">{logo}</div>
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-        <div className="hidden md:block">{topRightAction}</div>
-      </motion.header>
-
+      {/* Hero Content */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -114,42 +83,44 @@ export const AnimatedHero = ({
       >
         <motion.h1
           variants={itemVariants}
-          className="text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl lg:text-7xl"
+          className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
         >
           {title}
         </motion.h1>
+
         <motion.p
           variants={itemVariants}
-          className="mt-6 max-w-2xl text-lg leading-8 text-primary-foreground/80"
+          className="mt-6 max-w-2xl text-lg leading-8 text-white/80"
         >
           {description}
         </motion.p>
-        {(ctaButton || secondaryCta) && (
-  <motion.div
-    variants={itemVariants}
-    className="mt-10 flex items-center gap-x-4"
-  >
-    {ctaButton && (
-      <Button
-        onClick={ctaButton.onClick}
-        size="lg"
-        className={glassButtonClassName}
-      >
-        {ctaButton.text}
-      </Button>
-    )}
 
-    {secondaryCta && (
-      <Button
-        onClick={secondaryCta.onClick}
-        size="lg"
-        className={glassButtonClassName}
-      >
-        {secondaryCta.text}
-      </Button>
-    )}
-  </motion.div>
-)}
+        {(ctaButton || secondaryCta) && (
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex items-center gap-x-4"
+          >
+            {ctaButton && (
+              <Button
+                onClick={ctaButton.onClick}
+                size="lg"
+                className={glassButtonClassName}
+              >
+                {ctaButton.text}
+              </Button>
+            )}
+
+            {secondaryCta && (
+              <Button
+                onClick={secondaryCta.onClick}
+                size="lg"
+                className={glassButtonClassName}
+              >
+                {secondaryCta.text}
+              </Button>
+            )}
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );
