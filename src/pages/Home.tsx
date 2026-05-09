@@ -3,9 +3,11 @@
 import Navbar from "@/components/Navbar";
 import { AnimatedHero } from "@/components/ui/animated-hero-section-1";
 import { Button } from "@/components/ui/button";
-import { MountainIcon } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { MountainIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const navLinks = [
@@ -40,6 +42,8 @@ export default function Home() {
       />
 
       <ParallaxSection />
+      <TestimonialSection />
+      <Footer />
     </>
   );
 }
@@ -301,5 +305,225 @@ function SectionCard({
         </div>
       </motion.div>
     </div>
+  );
+}
+
+
+// TESTIMONIAL SECTION
+
+function TestimonialSection() {
+  const testimonials = [
+    {
+      name: "Aarav Sharma",
+      title: "Stayed with family • Kolkata",
+      description:
+        "Rangbul-La felt like a hidden Himalayan sanctuary. The forest views, warm hospitality, and peaceful atmosphere made our stay unforgettable.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
+    },
+
+    {
+      name: "Priya Mehta",
+      title: "Solo Traveller • Mumbai",
+      description:
+        "The rooms were elegant, cozy, and deeply connected with nature. Every morning felt magical with the mountain mist and birdsong.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
+    },
+
+    {
+      name: "Rahul Verma",
+      title: "Couple Retreat • Bangalore",
+      description:
+        "From the soulful food to the breathtaking surroundings, everything at Rangbul-La was crafted with love and authenticity.",
+      imageUrl:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop",
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
+
+  const currentTestimonial = testimonials[currentIndex];
+
+  const socialIcons = [
+    { icon: FaInstagram, label: "Instagram" },
+    { icon: FaTwitter, label: "Twitter" },
+    { icon: FaYoutube, label: "Youtube" },
+    { icon: FaLinkedin, label: "LinkedIn" },
+  ];
+
+  return (
+    <section className="bg-black text-white py-24 px-6 md:px-12 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-semibold">
+            Guest Experiences
+          </h2>
+
+          <p className="text-white/60 mt-6 max-w-2xl mx-auto leading-7">
+            Stories, memories, and moments shared by guests who
+            experienced the peaceful charm of Rangbul-La.
+          </p>
+        </div>
+
+        <div className="hidden lg:flex relative items-center justify-center">
+          <div className="w-[460px] h-[540px] rounded-[32px] overflow-hidden flex-shrink-0 shadow-2xl">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentTestimonial.imageUrl}
+                src={currentTestimonial.imageUrl}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.45,
+                  ease: "easeInOut",
+                }}
+                className="w-full h-full object-cover"
+                draggable={false}
+              />
+            </AnimatePresence>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-[32px] p-10 ml-[-90px] z-10 max-w-2xl shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTestimonial.name}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeInOut",
+                }}
+              >
+                <h3 className="text-3xl font-semibold">
+                  {currentTestimonial.name}
+                </h3>
+
+                <p className="text-white/60 mt-2">
+                  {currentTestimonial.title}
+                </p>
+
+                <p className="text-lg leading-8 text-white/80 mt-8">
+                  {currentTestimonial.description}
+                </p>
+
+                <div className="flex gap-4 mt-10">
+                  {socialIcons.map(({ icon: Icon, label }, index) => (
+                    <button
+                      key={index}
+                      className="w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300"
+                      aria-label={label}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <div className="lg:hidden max-w-sm mx-auto">
+          <div className="aspect-square rounded-[28px] overflow-hidden shadow-2xl">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentTestimonial.imageUrl}
+                src={currentTestimonial.imageUrl}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.45,
+                  ease: "easeInOut",
+                }}
+                className="w-full h-full object-cover"
+                draggable={false}
+              />
+            </AnimatePresence>
+          </div>
+
+          <div className="mt-8 text-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-[28px] p-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTestimonial.name}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeInOut",
+                }}
+              >
+                <h3 className="text-2xl font-semibold">
+                  {currentTestimonial.name}
+                </h3>
+
+                <p className="text-white/60 mt-2">
+                  {currentTestimonial.title}
+                </p>
+
+                <p className="text-white/80 leading-7 mt-6">
+                  {currentTestimonial.description}
+                </p>
+
+                <div className="flex justify-center gap-4 mt-8">
+                  {socialIcons.map(({ icon: Icon, label }, index) => (
+                    <button
+                      key={index}
+                      className="w-11 h-11 rounded-full bg-white/10 border border-white/10 flex items-center justify-center"
+                      aria-label={label}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <div className="flex justify-center items-center gap-6 mt-14">
+          <button
+            onClick={handlePrevious}
+            className="w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <div className="flex gap-3">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentIndex === index
+                    ? "bg-white scale-125"
+                    : "bg-white/30"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={handleNext}
+            className="w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-all duration-300"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }
