@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MountainIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -56,11 +56,11 @@ function ParallaxSection() {
       id: 1,
       title: "About Us",
       description:
-        "Nestled in the peaceful Himalayas, Rangbul-La offers a luxurious and sustainable homestay experience surrounded by forests, clouds, and breathtaking views. Just 20 minutes from Darjeeling Mall Road, it is the perfect escape from the crowded town — where nature, comfort, and soulful living come together to create unforgettable memories.",
+        "Nestled in the peaceful Himalayas, Rangbul La offers a luxurious and sustainable homestay experience surrounded by forests, clouds, and breathtaking views. Just 20 minutes from Darjeeling Mall Road, it is the perfect escape from the crowded town — where nature, comfort, and soulful living come together to create unforgettable memories.",
       images: [
         "src/assets/About Us1.heic",
-        "src/assets/About Us2.heic",
-        "src/assets/About Us3.heic",
+        "src/assets/About Us2.jpg",
+        "src/assets/About Us3.jpg",
       ],
       reverse: false,
     },
@@ -68,7 +68,7 @@ function ParallaxSection() {
       id: 2,
       title: "Luxury Stays",
       description:
-        "Discover a peaceful escape where luxury meets nature in the heart of the Himalayas. Our thoughtfully designed stays offer elegant comfort, breathtaking forest and mountain views, and a tranquil atmosphere that lets you truly unwind. Just away from the bustle of Darjeeling town, Rangbul-La is a space to slow down, reconnect, and create unforgettable memories with your loved ones.",
+        "Discover a peaceful escape where luxury meets nature in the heart of the Himalayas. Our thoughtfully designed stays offer elegant comfort, breathtaking forest and mountain views, and a tranquil atmosphere that lets you truly unwind. Just away from the bustle of Darjeeling town, Rangbul La is a space to slow down, reconnect, and create unforgettable memories with your loved ones.",
       images: [
         "src/assets/Luxury Stays1.jpg",
         "src/assets/Luxury Stays2.jpg",
@@ -80,7 +80,7 @@ function ParallaxSection() {
       id: 3,
       title: "Culinary Delights",
       description:
-        "Experience soulful dining with carefully curated meals made from fresh ingredients and inspired by local Himalayan flavors. From comforting breakfasts with scenic views to warm, homestyle delicacies, every meal at Rangbul-La is crafted to bring together taste, freshness, and the warmth of mountain hospitality.",
+        "Experience soulful dining with carefully curated meals made from fresh ingredients and inspired by local Himalayan flavors. From comforting breakfasts with scenic views to warm, homestyle delicacies, every meal at Rangbul La is crafted to bring together taste, freshness, and the warmth of mountain hospitality.",
       images: [
         "src/assets/Culinary Delights1.jpg",
         "src/assets/Culinary Delights2.jpg",
@@ -296,7 +296,7 @@ function SectionCard({
                 <img
                   src={image}
                   draggable={false}
-                  className="h-full w-full object-contain pointer-events-none"
+                  className="h-full w-full object-cover pointer-events-none"
                   alt={section.title}
                 />
               </motion.div>
@@ -317,7 +317,7 @@ function TestimonialSection() {
       name: "Aarav Sharma",
       title: "Stayed with family • Kolkata",
       description:
-        "Rangbul-La felt like a hidden Himalayan sanctuary. The forest views, warm hospitality, and peaceful atmosphere made our stay unforgettable.",
+        "Rangbul La felt like a hidden Himalayan sanctuary. The forest views, warm hospitality, and peaceful atmosphere made our stay unforgettable.",
       imageUrl:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop",
     },
@@ -335,7 +335,7 @@ function TestimonialSection() {
       name: "Rahul Verma",
       title: "Couple Retreat • Bangalore",
       description:
-        "From the soulful food to the breathtaking surroundings, everything at Rangbul-La was crafted with love and authenticity.",
+        "From the soulful food to the breathtaking surroundings, everything at Rangbul La was crafted with love and authenticity.",
       imageUrl:
         "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop",
     },
@@ -352,6 +352,14 @@ function TestimonialSection() {
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
   };
+
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  }, 10000); // changes every 10 seconds
+
+  return () => clearInterval(interval);
+}, [testimonials.length]);
 
   const currentTestimonial = testimonials[currentIndex];
 
@@ -372,7 +380,7 @@ function TestimonialSection() {
 
           <p className="text-white/60 mt-6 max-w-2xl mx-auto leading-7">
             Stories, memories, and moments shared by guests who
-            experienced the peaceful charm of Rangbul-La.
+            experienced the peaceful charm of Rangbul La.
           </p>
         </div>
 

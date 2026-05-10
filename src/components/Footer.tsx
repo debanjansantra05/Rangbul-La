@@ -4,19 +4,23 @@ import {
   Mail,
   Phone,
   MapPin,
-  Globe,
 } from "lucide-react";
 
 import {
   FaInstagram,
-  FaDribbble,
   FaFacebook,
+  FaTwitter,
+  FaYoutube,
 } from "react-icons/fa";
 
 const data = {
   facebookLink: "https://facebook.com/rangbulla",
-  instaLink: "https://www.instagram.com/rangbul_la?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-  dribbbleLink: "#",
+
+  instaLink:  "https://www.instagram.com/rangbul_la?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+
+  twitterLink: "https://twitter.com/",
+
+  youtubeLink: "https://youtube.com/",
 
   contact: {
     email: "rangbulla123@gmail.com",
@@ -67,19 +71,19 @@ export default function Footer() {
               </a>
 
               <a
-                href={data.dribbbleLink}
+                href={data.twitterLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaDribbble className="h-5 w-5 hover:text-white/70 transition" />
+                <FaTwitter className="h-5 w-5 hover:text-white/70 transition" />
               </a>
 
               <a
-                href="#"
+                href={data.youtubeLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Globe className="h-5 w-5 hover:text-white/70 transition" />
+                <FaYoutube className="h-5 w-5 hover:text-white/70 transition" />
               </a>
 
             </div>
@@ -108,7 +112,8 @@ export default function Footer() {
 
         {/* BOTTOM */}
         <div className="border-t border-white/10 mt-12 pt-6 text-center text-white/50">
-          © 2026 Rangbul La. All rights reserved.
+          © 2026 Rangbul La. All rights reserved. <br />
+          Developed & Maintained by Debanjan Santra
         </div>
 
       </div>
